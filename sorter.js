@@ -30,12 +30,6 @@ function text_show2() {
     console.log('');
 }
 
-function dirs_show() {
-    glob(`${check_folder}/**/**/*asswords.txt`, function(err, files) {
-        console.log(files);
-    });
-}
-
 function text_show3() {
     console.log('');
     console.log(' Sorting logs...'.cyan);
@@ -67,7 +61,6 @@ async function main() {
 setTimeout(text_show, 1000);
 setTimeout(zapros_show, 1200);
 setTimeout(text_show2, 2100);
-setTimeout(dirs_show, 2300);
 setTimeout(text_show3, 2600);
 setTimeout(main, 2900);
 return 1
