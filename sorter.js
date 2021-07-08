@@ -52,7 +52,7 @@ async function main() {
                     if(data.includes(request)) {
                         let tempstring = files[i].split(`${check_folder}/`)[1];
                         let result = tempstring.substring(0, tempstring.search('/'));
-                        fs2.copy(`${check_folder}/${result}/`, `results/young_prince/${request}/${result}/`, function (err) {
+                        fs2.copy(`${check_folder}/${result}/`, `results/${request}/${result}/`, function (err) {
                             if (err) return console.log(err)
                             console.log(` [${request}]`, `${result}`.green, `is saved`.yellow)
                         });
