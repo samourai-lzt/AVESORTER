@@ -1,2 +1,30 @@
-# AVESORTER
-A simple light-weight sorter for you
+
+▄▀█ █ █ █▀▀ █▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█
+█▀█ ▀▄▀ ██▄ ▄█ █▄█ █▀▄  █  ██▄ █▀▄
+with luv by samourai lzt <3
+
+------
+
+Before using sorter install NodeJS first. 
+The installer located here but also you can download it from https://nodejs.org/en/
+
+Principle of use:
+
+1) Install NodeJS v16+
+2) Put logs (in the form of folders, not archives) in logs directory
+3) Change requests to your own in requests.txt
+4) Run start.bat
+5) Check out result directory
+
+------
+
+Перед использованием сортера установи NodeJS. 
+Установщик расположен прямо здесь, но ты так же можешь скачать его здесь https://nodejs.org/en/
+
+Принцип использования:
+
+1) Установить NodeJS v16+
+2) Поместить логи (в виде папок, не архивы) в папку logs
+3) Изменить запросы на свои в requests.txt
+4) Запустить start.bat
+5) Получить результаты в папке results
