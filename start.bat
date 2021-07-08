@@ -1,0 +1,2 @@
+node sorter.js
+pause
