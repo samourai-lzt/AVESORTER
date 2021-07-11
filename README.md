@@ -5,6 +5,9 @@ with luv by samourai lzt <3
 
 ------
 
+special thanks to https://github.com/AlexBennett1337
+
+------
 Before using sorter install NodeJS first. 
 The installer located here but also you can download it from https://nodejs.org/en/
 
