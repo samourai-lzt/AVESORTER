@@ -85,8 +85,6 @@ async function copyFile(request, result, check_folder) {
     }
  }
 
-
- 
 function main() {
     return new Promise(async (resolve, reject) => {
         const mainaction = await prompts([
