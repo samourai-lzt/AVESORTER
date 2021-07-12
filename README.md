@@ -12,16 +12,18 @@ with luv by samourai lzt <3
 special thanks to https://github.com/AlexBennett1337
 
 ------
+
 Before using sorter install NodeJS first. 
 The installer located here but also you can download it from https://nodejs.org/en/
 
 Principle of use:
 
-1) Install NodeJS v16+
+1) Install NodeJS v16+2)Run modules installer with install_modules.bat (you need to do it only on first setup, no need to use it on every start)
 2) Put logs (in the form of folders, not archives) in logs directory
 3) Change requests to your own in requests.txt
-4) Run start.bat
-5) Check out result directory
+4) Run modules installer with install_modules.bat (you need to do it only on first setup, no need to use it on every start)
+5) Run start.bat 
+6) Check out result directory
 
 ------
 
@@ -31,7 +33,8 @@ Principle of use:
 Принцип использования:
 
 1) Установить NodeJS v16+
-2) Поместить логи (в виде папок, не архивы) в папку logs
-3) Изменить запросы на свои в requests.txt
-4) Запустить start.bat
-5) Получить результаты в папке results
+2) Установить модули с помощью install_modules.bat (это нужно сделать всего один раз при первом запуске программы)
+3) Поместить логи (в виде папок, не архивы) в папку logs
+4) Изменить запросы на свои в requests.txt
+5) Запустить start.bat
+6) Получить результаты в папке results
