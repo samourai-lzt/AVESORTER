@@ -1,3 +1,3 @@
 @echo off
-node sorter.js
+node loader.js
 pause

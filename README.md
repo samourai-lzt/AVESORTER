@@ -1,10 +1,6 @@
 ＡＶＥＳＯＲＴＥＲ
 ------
 
-![image](https://user-images.githubusercontent.com/78436325/125211827-e68cad80-e2b1-11eb-957b-94d8de6266c7.png)
-
-------
-
 with luv by samourai lzt <3
 
 ------
@@ -18,7 +14,7 @@ The installer located here but also you can download it from https://nodejs.org/
 
 Principle of use:
 
-1) Install NodeJS v16+2
+1) Install NodeJS v16+
 2) Run modules installer with install_modules.bat (you need to do it only on first setup, no need to use it on every start)
 3) Put logs (in the form of folders, not archives) in logs directory
 4) Change requests to your own in requests.txt
