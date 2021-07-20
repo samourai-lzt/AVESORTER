@@ -21,7 +21,7 @@
           "There is nothing to sort. Are you sure what ",
           " isn't empty?",
           " @avelou_work ",
-          "Check logs for Discord tokens in .ldb files",
+          "Check logs for Discord tokens",
           "Sort only for tokens",
           " If you want to add some new features ask me in TG:",
           " Thanks for using. If you have any questions ask me in TG:"
@@ -49,9 +49,9 @@
           "Тут нечего сортировать. Вы уверены, что папка ",
           " не пуста?",
           " @avelou_work ",
-          "Проверять логи на наличие Discord токенов в .ldb файлах",
+          "Проверять логи на наличие Discord токенов",
           "Отсортировать только на наличие токенов",
           " Если вы хотите предложить функционал для реализации, то свяжитесь со мной в Telegram:",
-          " Спасибо за использование. Если у вас остались вопросы по работе, то жду вас в Telegram:"         
+          " Спасибо за использование. Если у вас остались вопросы по работе, то жду вас в Telegram:"
         ]
 }
