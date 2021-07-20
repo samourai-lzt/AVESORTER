@@ -7,7 +7,8 @@ const prompts = require('prompts');
 const langlist = require('./../lang.json');
 const check_folder = './logs';
 const results_folder = './results';
-let files = glob.sync(`./logs/**/Discord/**/*.ldb`);
+let files = glob.sync(`./logs/**/Discord/**/*.l**`);
+let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
 let version = "0.2";
 let zxc = [];
 
@@ -117,10 +118,10 @@ module.exports = {
     
     discord_ldb: function () {
         if (!files.length) {
-            console.log('');
-            console.log(`$`.cyan, `${langlist[lang][18]}${check_folder}${langlist[lang][19]}`);
-            console.log('');
-            console.log('');
+            return new Promise(async (resolve, reject) => {
+            this.discord_txt();
+            resolve("Ok");
+            });
         }
         else {
             return new Promise(async (resolve, reject) => {
@@ -133,7 +134,7 @@ module.exports = {
                     var result = data.substr(res1 + 1, 59);
                     var symbol_check = data.substr(res1 + 1, 1);
                     if (symbol_check.match(/[A-Z^\d]/) !== null) {
-                        zxc[i] = result;
+                        zxc.push(result);
                     }
                 }
                 else {
@@ -142,16 +143,50 @@ module.exports = {
                         var mfa_symbol_check = data.substr(res1 + 1, 3);
                         if (mfa_symbol_check.match('mfa') !== null) {
                             var mfa_result = data.substr(res1 + 1, 88);
-                            zxc[i] = mfa_result;
+                            zxc.push(mfa_result);
                         }
                     }
                 }
             }
+            this.discord_txt();
             resolve("Ok");
             });
         }
     },
-     
+    
+    discord_txt: function () {
+        if (!files2.length) {
+            if (!zxc.length) {
+                console.log('');
+                console.log(`$`.cyan, `${langlist[lang][18]}${check_folder}${langlist[lang][19]}`);
+                console.log('');
+                console.log('');
+            }
+        }
+        
+        else {
+            return new Promise(async (resolve, reject) => {
+                for (let i = 0; i < files2.length; i ++) {
+                    let data2 = fs.readFileSync(files2[i], 'utf-8');
+                    let temping = data2.toString().split('\n').toString().split('\r,');
+                    for (temping_sex of temping) {
+                        let symbol_check2 = temping_sex.substr(0, 1);
+                        if (symbol_check2.match(/([^a-z\s\d])/) !== null) {
+                            zxc.push(temping_sex);
+                        }
+                        else {
+                            let mfa_symbol_check2 = temping_sex.substr(0, 3);
+                            if (mfa_symbol_check2.match('mfa') !== null) {
+                                zxc.push(temping_sex);
+                            }
+                        }
+                    }
+                }    
+                resolve("Ok");
+            });         
+        }
+    },
+
     tokens_filter: function () {
         return new Promise(async (resolve, reject) => {
         var filtered_zxc = zxc.filter(function (el) {
@@ -236,7 +271,7 @@ module.exports = {
                                         console.log('');
                                         this.discord_ldb().then(async(result1) => {
                                             if (result1 == "Ok") {
-                                               this.tokens_filter().then(async(result2) => {
+                                                this.tokens_filter().then(async(result2) => {
                                                     if (result2 == "Ok") {
                                                         for (folderpath of zxcfiles) {
                                                             let data = fs.readFileSync(folderpath, 'utf8');
@@ -251,12 +286,12 @@ module.exports = {
                                                         setTimeout(() => {
                                                             console.log('');
                                                             console.log('');
-                                                            console.log('$'.cyan, langlist[lang][22], langlist[lang][20].black.bgCyan);
+                                                            console.log('$'.cyan, langlist[lang][24], langlist[lang][20].black.bgCyan);
                                                             console.log('');
                                                             console.log('');
                                                         }, 1000); 
                                                     }
-                                               });                                             
+                                                });                                        
                                             }
                                         });    
                                     }, 1000);
