@@ -9,7 +9,7 @@ const check_folder = './logs';
 const results_folder = './results';
 let files = glob.sync(`./logs/**/Discord/**/*.l**`);
 let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
-let version = "0.2";
+let version = "0.3";
 let zxc = [];
 
 let lang = false;
