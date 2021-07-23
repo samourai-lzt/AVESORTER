@@ -9,7 +9,7 @@ const check_folder = './logs';
 const results_folder = './results';
 let files = glob.sync(`./logs/**/Discord/**/*.l**`);
 let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
-let version = "0.3";
+let version = "0.4";
 
 let cryptofolders = ["Crypto Wallet", "Crypto Wallets", "Coins", "cryptocurrency", "Wallets", "coldwallets", "crypto"];
 let zxc = [];
