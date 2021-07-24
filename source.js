@@ -24,7 +24,7 @@ module.exports = {
     logo: function () {
         console.clear();
         console.log('');
-        console.log(`${`  ▄▀█ █ █ █▀▀ █▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█ `.brightBlue}${langlist[lang][0].brightYellow}                                        ${`v`.grey}${version.grey}`);
+        console.log(`${`  ▄▀█ █ █ █▀▀ █▀ █▀█ █▀█ ▀█▀ █▀▀ █▀█ `.brightBlue}${langlist[lang][0].brightYellow}                                ${`v`.grey}${version.grey}`);
         console.log(`${`  █▀█ ▀▄▀ ██▄ ▄█ █▄█ █▀▄  █  ██▄ █▀▄ `.brightBlue}${langlist[lang][1].brightRed}`);
         console.log('');
         console.log('');
