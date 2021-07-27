@@ -7,8 +7,7 @@ const prompts = require('prompts');
 const langlist = require('./../lang.json');
 const check_folder = './logs';
 const results_folder = './results';
-let files = glob.sync(`./logs/**/Discord/**/*.l**`);
-let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
+
 let version = "0.4";
 
 let cryptofolders = ["Crypto Wallet", "Crypto Wallets", "Coins", "cryptocurrency", "Wallets", "coldwallets", "crypto"];
@@ -137,6 +136,7 @@ module.exports = {
     },
 
     discord_ldb: function () {
+        let files = glob.sync(`./logs/**/Discord/**/*.l**`);
         if (!files.length) {
             return new Promise(async (resolve, reject) => {
                 this.discord_txt();
@@ -176,6 +176,7 @@ module.exports = {
     },
 
     discord_txt: function () {
+        let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
         if (!files2.length) {
             if (!zxc.length) {
                 console.log('');
@@ -233,6 +234,7 @@ module.exports = {
 
     main: function () {
         return new Promise(async (resolve, reject) => {
+
             /*
             const mainaction = await prompts([
                 {
@@ -483,7 +485,7 @@ module.exports = {
                                                 console.log('');
                                                 console.log('', langlist[lang][17].black.bgWhite);
                                                 console.log('');
-                                                this.crypto().then(async(result5) => {
+                                                this.crypto().then(async (result5) => {
                                                     if (result5 == "Ok") {
                                                         setTimeout(() => {
                                                             console.log('');
@@ -499,29 +501,32 @@ module.exports = {
                                     }, 1000);
                                     break;
                                 case 'do':
-                                    setTimeout(() => {
-                                        fs.mkdirSync(`${results_folder}/Discord/`);
-                                        fs.appendFileSync(`${results_folder}/Discord/output_tokens.txt`, "");
-                                        console.clear();
-                                        this.logo();
-                                        console.log('$'.cyan, ` ${langlist[lang][16]}${mainaction.text}`);
-                                        console.log('');
-                                        console.log('');
-                                        console.log('', langlist[lang][17].black.bgWhite);
-                                        console.log('');
-                                        this.discord_ldb().then(async (result1) => {
-                                            if (result1 == "Ok") {
-                                                this.tokens_filter()
-                                                setTimeout(() => {
-                                                    console.log('');
-                                                    console.log('');
-                                                    console.log('$'.cyan, langlist[lang][23], langlist[lang][20].black.bgCyan);
-                                                    console.log('');
-                                                    console.log('');
-                                                }, 1000);
-                                            }
-                                        });
-                                    }, 1000);
+                                    let check = fs.existsSync(`${results_folder}/Discord`);
+                                    if (check == false) {
+                                        fs.mkdirSync(`${results_folder}/Discord`);
+                                    }
+                                    console.clear();
+                                    this.logo();
+                                    console.log('');
+                                    console.log('');
+                                    console.log('', langlist[lang][17].black.bgWhite);
+                                    console.log('');
+                                    this.discord_ldb().then(async (result1) => {
+                                        if (result1 == "Ok") {
+                                            this.tokens_filter().then(async (result2) => {
+                                                if (result2 == "Ok") {                                                  
+                                                    setTimeout(() => {
+                                                        console.log('');
+                                                        console.log('');
+                                                        console.log('$'.cyan, langlist[lang][24], langlist[lang][20].black.bgCyan);
+                                                        console.log('');
+                                                        console.log('');
+                                                    }, 1000);
+                                                }
+                                            });
+                                        }
+                                    });
+                                    break;
                             }
                         }
                     }, 1000);
