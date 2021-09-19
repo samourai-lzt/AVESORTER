@@ -10,7 +10,7 @@ let check = [];
 
 function lang() {
     return new Promise(async (resolve, reject) => {
-        const script = require('./src/source2');
+        const script = require('./src/source');
         console.clear();
         script.setlang("EN");
         script.logo();
