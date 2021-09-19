@@ -1,6 +1,6 @@
 {
   "EN": [
-    "special thanks to github.com/AlexBennett1337",
+    "special thanks to @lolpiala",
     "made with luv by samourai lzt <3 ",
     "In  developing",
     "Okay, skipping...",
@@ -26,10 +26,20 @@
     " If you want to add some new features ask me in TG:",
     " Thanks for using. If you have any questions ask me in TG:",
     "Check logs for cold crypto wallets?",
-    "Sort only for walltes"
+    "Sort only for walltes",
+    "Choose what I must sort:",
+    "Requests from a file requests.txt",
+    "Wallets (crypto)",
+    "Discord tokens",
+    "use arrows to choose the spacebar to select and Enter to continue",
+    "tokens ",
+    "are empty",
+    "dirs for ",
+    "wallets ",
+    "requests "
   ],
   "RU": [
-    "благодарность github.com/AlexBennett1337",
+    "благодарность @lolpiala",
     "сделано с любовью от samourai <3 ",
     " В разработке ",
     "Хорошо, пропускаю...",
@@ -55,10 +65,20 @@
     " Если вы хотите предложить функционал для реализации, то свяжитесь со мной в Telegram:",
     " Спасибо за использование. Если у вас остались вопросы по работе, то жду вас в Telegram:",
     "Проверять логи на наличие холодных криптокошельков?",
-    "Сохранять только крипту"
+    "Сохранять только крипту",
+    "Выберите, что я должен отсортить:",
+    "Запросы из файла requests.txt",
+    "Wallets (crypto)",
+    "Discord токены",
+    "используй стрелки для выбора, Space для подтверждения и Enter для продолжения",
+    "токены ",
+    "отсутствуют",
+    "пути для ",
+    "валлетов ",
+    "запросов "
   ],
   "DE": [
-    "Besonderer Dank an github.com/AlexBennett1337",
+    "Besonderer Dank an @lolpiala",
     "made with luv by samourai lzt <3",
     "In der Entwicklung",
     "Okay, wird übersprungen...",
@@ -84,7 +104,17 @@
     " Wenn du neue Funktionen vorschlagen möchtest, kontaktiere mich auf TG:",
     "Danke, dass du Avessorter benutzt. Wenn du Fragen haben solltest kontaktiere mich auf TG:",
     "Logs auf cold crypto wallets überprüfen?",
-    "Nur nach wallets suchen"
+    "Nur nach wallets suchen",
+    "Auswählen, was ich zu sortieren habe:",
+    "Abfragen aus einer Datei requests.txt",
+    "Wallets (crypto)",
+    "Discord tokens",
+    "use arrows to choose the spacebar to select and Enter to continue",
+    "Tokens ",
+    "nicht verfügbar",
+    "Pfade für ",
+    "wallets ",
+    "requests "
   ],
 
   "JP": [
