@@ -252,26 +252,6 @@ module.exports = {
     },
 
     main: async function () {
-
-        /*
-        const mainaction = await prompts([
-            {
-                type: 'select',
-                name: 'text',
-                message: langlist[lang][12],
-                choices: [
-                    { title: langlist[lang][13], value: 1 },
-                    { title: langlist[lang][15], value: 2 }
-                ],
-                hint: langlist[lang][8]
-            }
-        ]);
-        console.clear();
-        this.logo();
-        console.log('$'.cyan, `${langlist[lang][16]}${mainaction.text}`);
-        console.log('');
-        */
-
         switch (parseInt(1)) {
             case 1:
                 console.clear();
@@ -280,7 +260,7 @@ module.exports = {
                     {
                         type: 'multiselect',
                         name: 'text',
-                        message: langlist[lang][28],
+                        message: langlist[lang][27],
                         choices: [
                             { title: langlist[lang][28], value: 1 },
                             { title: langlist[lang][29], value: 2 },
