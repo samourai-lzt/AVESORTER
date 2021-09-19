@@ -10,7 +10,7 @@ let check = [];
 
 function lang() {
     return new Promise(async (resolve, reject) => {
-        const script = require('./src/source');
+        const script = require('./src/source2');
         console.clear();
         script.setlang("EN");
         script.logo();
@@ -20,8 +20,9 @@ function lang() {
                 name: 'text',
                 message: 'Your language is',
                 choices: [
-                    { title: 'ENG', value: "EN" },
-                    { title: 'RUS', value: "RU" }
+                    { title: 'English', value: "EN" },
+                    { title: 'Russian', value: "RU" },
+                    { title: 'Deutsche', value: "DE" }
                 ], 
                 hint: 'use arrows to select'
             }
@@ -33,7 +34,11 @@ function lang() {
                 console.clear();
                 script.text_show().then(async(result2) => {
                     if (result2 == "Ok") {
-                        script.main();
+                        script.main().then(async(resultm) => {
+                            if (resultm == "Ok") {
+                                console.log("");
+                            }
+                        });
                     }
                 });
             }
@@ -48,7 +53,7 @@ function check_folders() {
             console.log('$'.cyan, ` Checking/creating requied dirs...`);
             console.log('');
             setTimeout(() => {
-                for(const dirs_check of Object.values(dirs)) {
+                for (const dirs_check of dirs) {
                     if (glob.sync(`./${dirs_check}`) != `./${dirs_check}`) {
                         console.log(` [${dirs_check}]`, `${`not found`.cyan} so it was ${`created`.green}`);
                         fs.mkdirSync(`./${dirs_check}`);
@@ -59,8 +64,8 @@ function check_folders() {
                 }    
                 console.log();
                 resolve("Ok");  
-            }, 500);    
-        }, 500);
+            }, 250);    
+        }, 250);
     })
 }
 
@@ -70,6 +75,7 @@ check_folders().then(async(result3) => {
             console.log('$'.cyan, ` Replacing source.js file...`);
             console.log('');
             setTimeout(() => {
+                try {
                 fs2.moveSync(`./source.js`, `./src/source.js`);
                 if (fs2.existsSync(`./src/source.js`)) {
                     console.log(` [source.js]`, `is OK`.green);
@@ -79,6 +85,10 @@ check_folders().then(async(result3) => {
                 }
                 else {
                     console.log(` ${'Error while replacing source.js'.white.bgRed}`);
+                }
+                }
+                catch (err) {
+                    console.log(` ${'Error while replacing source.js, file not found'.white.bgRed}\n`)
                 }
             }, 500);           
         }
