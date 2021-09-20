@@ -4,9 +4,7 @@ const glob = require('glob');
 const fs = require('fs');
 const fs2 = require('fs-extra');
 
-let dir = `${glob.sync(`./results`)}`;
 let dirs = ['results', 'logs', 'src'];
-let check = [];
 
 function lang() {
     return new Promise(async (resolve, reject) => {
@@ -23,18 +21,18 @@ function lang() {
                     { title: 'English', value: "EN" },
                     { title: 'Russian', value: "RU" },
                     { title: 'Deutsche', value: "DE" }
-                ], 
+                ],
                 hint: 'use arrows to select'
             }
-        ]);           
-		script.setlang(lang_choose.text);
-        script.logo();     
-        script.clear_prev().then(async(result1) => {
+        ]);
+        script.setlang(lang_choose.text);
+        script.logo();
+        script.clear_prev().then(async (result1) => {
             if (result1 == "Ok") {
                 console.clear();
-                script.text_show().then(async(result2) => {
+                script.text_show().then(async (result2) => {
                     if (result2 == "Ok") {
-                        script.main().then(async(resultm) => {
+                        script.main().then(async (resultm) => {
                             if (resultm == "Ok") {
                                 console.log("");
                             }
@@ -42,7 +40,7 @@ function lang() {
                     }
                 });
             }
-        });       
+        });
     });
 }
 
@@ -61,36 +59,40 @@ function check_folders() {
                     else {
                         console.log(` [${dirs_check}]`, `${`is OK`.green}`);
                     }
-                }    
+                }
                 console.log();
-                resolve("Ok");  
-            }, 250);    
+                resolve("Ok");
+            }, 250);
         }, 250);
     })
 }
 
-check_folders().then(async(result3) => {
+check_folders().then(async (result3) => {
     if (result3 == "Ok") {
         if (fs2.existsSync(`./src/source.js`) == false) {
             console.log('$'.cyan, ` Replacing source.js file...`);
             console.log('');
             setTimeout(() => {
                 try {
-                fs2.moveSync(`./source.js`, `./src/source.js`);
-                if (fs2.existsSync(`./src/source.js`)) {
-                    console.log(` [source.js]`, `is OK`.green);
-                    setTimeout(() => {
-                        lang();
-                    }, 100);
-                }
-                else {
-                    console.log(` ${'Error while replacing source.js'.white.bgRed}`);
-                }
+                    fs2.moveSync(`./source.js`, `./src/source.js`);
+                    if (fs2.existsSync(`./src/source.js`)) {
+                        console.log(` [source.js]`, `is OK`.green);
+                    }
                 }
                 catch (err) {
                     console.log(` ${'Error while replacing source.js, file not found'.white.bgRed}\n`)
                 }
-            }, 500);           
+            }, 500);
+        }
+        if (fs2.existsSync(`./requests.txt`) == false) {
+            console.log('$'.cyan, ` Creating requests file...`);
+            fs.appendFileSync(`requests.txt`, "");
+            if (fs2.existsSync(`./requests.txt`)) {
+                console.log(`\n [requests.txt]`, `is OK`.green);
+                setTimeout(() => {
+                    lang();
+                }, 1000);
+            }
         }
         else {
             setTimeout(() => {
